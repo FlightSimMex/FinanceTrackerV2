@@ -45,12 +45,10 @@ public abstract class AppFrame extends JFrame
     final private Font titleFont = new Font("Times New Roman",0, 28);
     final private LayoutManager centerLayout;
 
-    final private int WINDOW_WIDTH = 1000;
-    final private int WINDOW_HEIGHT = 800;
+    final private int WINDOW_WIDTH = 1000, WINDOW_HEIGHT = 800;
 
     private JFrame mainFrame;
-    private JPanel panelTitle;
-    private JPanel panelMainContainer;
+    private JPanel panelTitle, panelMainContainer;
     private JLabel labelTitle;
 
     //Constructor
