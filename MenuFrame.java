@@ -62,6 +62,7 @@ public class MenuFrame extends AppFrame implements ActionListener
         super(title, layout);
         createPanels();
         createButtons();
+        setVisible(true);
 
     }
 
