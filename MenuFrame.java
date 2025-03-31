@@ -2,7 +2,7 @@
  * Class Name: MenuFrame
  * Credit: Pablo Bandera Lopez
  * Created: 03/05/2025
- * Modified:
+ * Modified: 03/24/2025
  * 
  * Description: Class Extends App Frame, creates main menu for user selection
  * 
@@ -48,18 +48,21 @@ import javax.swing.*;
 public class MenuFrame extends AppFrame implements ActionListener
 {
     //Atributes
-    private int selection = 0;
-    final private int LEFT = 67, CENTER = 390, RIGHT = 50+333+333;
-
-    final private Font BUTTON_FONT = new Font("Times New Roman", 0, 20);
+    private int selection = 0;//67
+    final private int LEFT = (this.getWindowWidth()/3/2)-125, CENTER = ((this.getWindowWidth()/3/2)-125)+(this.getWindowWidth()/3), RIGHT = ((this.getWindowWidth()/3/2)-125)+(2*(this.getWindowWidth()/3));
+    final private int VERTICAL_CENTER = (this.getWindowHeight()-150)/12;
+    final private Font BUTTON_FONT = new Font("Calibri", 0, 20);
 
     private JPanel topPanel, centerPanel, bottomPanel;
     private JButton newEntryButton, editEntryButton, deleteEntryButton, viewCurrntMonthButton, viewPastMonthButton, newMonthButton, clearMonthButton;
 
+    private Entries entries;
+
     //Constructor
-    public MenuFrame(String title, LayoutManager layout)
+    public MenuFrame(String title, LayoutManager layout, Entries entries)
     {
         super(title, layout);
+        this.entries = entries;
         createPanels();
         createButtons();
         setVisible(true);
@@ -113,11 +116,12 @@ public class MenuFrame extends AppFrame implements ActionListener
 
     //Creates a buttonwith the standard style of this app
     private JButton standardButton(String s, int x)
-    {
+    {   
+
         JButton button = new JButton(s);
         button.setVerticalTextPosition(JLabel.CENTER);
         button.setHorizontalTextPosition(JLabel.CENTER);
-        button.setBounds(x, 80,200,75);
+        button.setBounds(x, VERTICAL_CENTER,250,100);
         button.setFont(this.BUTTON_FONT);
         button.setFocusable(false);
         button.setBackground(Color.WHITE);
@@ -159,11 +163,27 @@ public class MenuFrame extends AppFrame implements ActionListener
     public void OnNewEntry()
     {
         System.out.println("New Entry");
+        Entry en = null;
+        new EntryFrame("Entry Number: ", new GridLayout(2,5), en, this.entries);
+        
     }
 
     public void OnEditEntry()
     {
         System.out.println("Edit Entry");
+        Entry en = null;
+        try{en = new Entry(10);en.setAmount(15.0);
+            en.setType(2);en.setCategory(1);
+            en.setSubcategory(1);
+            en.setSubcategory2(1);
+            en.setSubcategory2(1);
+            en.setSubcategory3(2);
+            en.setSubcategory4(1);
+            en.setAccount(1);
+            en.setComment("Comment");
+        }catch(InvalidEntryException e){System.out.println(e);}
+        
+        new EntryFrame("Entry Number: ", new GridLayout(2,5), en, this.entries);
     }
 
     public void OnDeleteEntry()
