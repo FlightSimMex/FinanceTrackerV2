@@ -2,7 +2,7 @@
  * Class Name: AppFrame
  * Credit: Pablo Bandera Lopez
  * Created: 03/05/2025
- * Modified:
+ * Modified: 03/24/2025
  * 
  * Description: Abstract Class, BluePrint for every App window
  * 
@@ -42,15 +42,13 @@ public abstract class AppFrame extends JFrame
     //Attributes
     private String title;
     final private String windowTitle = "Finance Tracker V1.2";
-    final private Font titleFont = new Font("Times New Roman",0, 28);
+    final private Font titleFont = new Font("Calibri",1, 35);
     final private LayoutManager centerLayout;
 
-    final private int WINDOW_WIDTH = 1000;
-    final private int WINDOW_HEIGHT = 800;
+    final private int WINDOW_WIDTH = 1000, WINDOW_HEIGHT = 800;
 
     private JFrame mainFrame;
-    private JPanel panelTitle;
-    private JPanel panelMainContainer;
+    private JPanel panelTitle, panelMainContainer;
     private JLabel labelTitle;
 
     //Constructor
@@ -86,7 +84,7 @@ public abstract class AppFrame extends JFrame
     {
         this.panelTitle = new JPanel();
         this.panelTitle.setVisible(true);
-        this.panelTitle.setPreferredSize(new Dimension(100,100)); 
+        this.panelTitle.setPreferredSize(new Dimension(100,150)); 
         this.panelTitle.setLayout(new BorderLayout(0,2));
         this.panelTitle.setBorder(BorderFactory.createEtchedBorder(1));
     }
@@ -134,6 +132,12 @@ public abstract class AppFrame extends JFrame
         if(this.panelMainContainer.getLayout() == null){throw new LayoutMismatchException("Main Container Layout is: NULL, excess of parameters");}//Incorrect method for container layout
         if(this.panelMainContainer.getLayout() instanceof GridLayout){this.panelMainContainer.add(component, index);}
 
+    }
+
+    //Changes Frame Tittle
+    public void changeTitle(String title)
+    {
+        this.labelTitle.setText(title);
     }
 
     //Override Dispose method for mainFrame

@@ -1,12 +1,10 @@
-import java.awt.Color;
 import java.awt.GridLayout;
-import javax.swing.JPanel;
 
 /**
  * Class Name: FinanceTracker
  * Credit: Pablo Bandera Lopez
  * Created: 03/05/2025
- * Modified:
+ * Modified: 03/24/2025
  * 
  * Description: Contains main(), and instantiates the first app frame
  * 
@@ -29,35 +27,13 @@ public class FinanceTracker
     }   
 
     public void runApp() throws LayoutMismatchException
-    {
+    {   
         //App Init
-        AppFrame mm = new TestFrame("Main Menu", new GridLayout(0,3));
+        Entries entries = new Entries();
 
-        JPanel panel1 = new JPanel();
-        panel1.setBackground(Color.BLUE);
-        panel1.setVisible(true);
-        panel1.setBounds(0,0,100,100);
-        JPanel panel2 = new JPanel();
-        panel2.setBackground(Color.GREEN);
-        panel2.setVisible(true);
-        panel2.setBounds(100,100,100,100);
-        JPanel panel3 = new JPanel();
-        panel3.setBackground(Color.RED);
-        panel3.setVisible(true);
-        panel3.setBounds(200,200,100,100);
-
-        mm.setLayout(null);
-
-        try {
-            mm.addToMainContainer(panel1);
-            mm.addToMainContainer(panel2);
-            mm.addToMainContainer(panel3);
-        } catch (LayoutMismatchException e) {
-            System.out.println(e);
-        }
-        
-       
-        
+        //App Start
+        AppFrame mm = new MenuFrame("Main Menu", new GridLayout(3,0), entries);
+    
 
     }
 }
