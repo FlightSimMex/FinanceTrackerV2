@@ -292,7 +292,7 @@ public class EntryFrame extends AppFrame
     {
         if(this.hasSubCat)
         {
-            
+            this.isValid = false;
             switch (this.entry.getCategory())
             {
                 case 1 -> {this.comboBoxSubCat1.setModel(new DefaultComboBoxModel(this.SUBCAT1_EXPENSE_LIVING)); this.hasSubCat2 = true;}
@@ -302,7 +302,6 @@ public class EntryFrame extends AppFrame
             }
             this.panel4.setVisible(true);
             this.panel4.setBorder(new BevelBorder(0));
-            this.isValid = false;
         }else{
             this.isValid = true;
         }
@@ -314,6 +313,7 @@ public class EntryFrame extends AppFrame
     {
         if(this.entry.getCategory() == 1 || (this.entry.getCategory() == 4 && this.entry.getSubcategory() ==2))
         {   
+            this.isValid = false;
             if(this.entry.getCategory() == 1)
             {
                 switch (this.entry.getSubcategory())
@@ -326,7 +326,7 @@ public class EntryFrame extends AppFrame
 
             this.panel5.setVisible(true);
             this.panel5.setBorder(new BevelBorder(0));
-            this.isValid = false;
+            
         }else{
             this.isValid = true;
         }
@@ -338,6 +338,7 @@ public class EntryFrame extends AppFrame
     {
         if((this.entry.getCategory() == 1 && this.entry.getSubcategory() == 1 && this.entry.getSubcategory2() > 0) || (this.entry.getCategory() == 1 && this.entry.getSubcategory() == 2 && this.entry.getSubcategory2() > 0))
         {   
+            this.isValid = false;
             if(this.entry.getSubcategory() == 1)
             {
                 switch (this.entry.getSubcategory2())
@@ -357,7 +358,7 @@ public class EntryFrame extends AppFrame
 
             this.panel6.setVisible(true);
             this.panel6.setBorder(new BevelBorder(0));
-            this.isValid = false;
+            
         }else{
             this.isValid = true;
         }
@@ -367,13 +368,15 @@ public class EntryFrame extends AppFrame
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private void setSubCat4()
     {
+        
         if((this.entry.getCategory() == 1 && this.entry.getSubcategory() == 1 && this.entry.getSubcategory2() == 1 && this.entry.getSubcategory3() == 2) || (this.entry.getCategory() == 1 && this.entry.getSubcategory() == 2 && this.entry.getSubcategory2() == 2 && this.entry.getSubcategory3() == 1) )
         {
+            this.isValid = false;
             if(this.comboBoxSubCat3.getSelectedItem().equals("Utilities")){this.comboBoxSubCat4.setModel(new DefaultComboBoxModel(this.SUBCAT4_RENT_UTILITIES));}
             else if(this.comboBoxSubCat3.getSelectedItem().equals("Eat Out")){this.comboBoxSubCat4.setModel(new DefaultComboBoxModel(this.SUBCAT4_FOODOUT_EATOUT));}
             this.panel7.setVisible(true);
             this.panel7.setBorder(new BevelBorder(0));
-            this.isValid = false;
+            
         }else{
             this.isValid = true;
         }
@@ -759,7 +762,8 @@ public class EntryFrame extends AppFrame
         try
         {
             entry.setSubcategory4(this.comboBoxSubCat4.getSelectedIndex());
-        }catch(InvalidEntryException e){}
+            isValid = true;
+        }catch(InvalidEntryException e){isValid = false;}
         
     }
 
