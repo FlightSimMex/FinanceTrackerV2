@@ -15,6 +15,7 @@ import java.awt.GridLayout;
  * + static main(String[] args):void
  * + runApp():void
  */
+
 public class FinanceTracker
 {
     //Constructor
