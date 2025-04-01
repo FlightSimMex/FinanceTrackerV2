@@ -27,15 +27,17 @@ import java.util.ArrayList;
 public class Entries {
 
     /* Attributes */
+    @SuppressWarnings("FieldMayBeFinal")
     private ArrayList<Entry> entries;
     private static FileManager fm;
+    
 
     /*Constructor */
+    @SuppressWarnings("OverridableMethodCallInConstructor")
     public Entries()
     {
         this.entries = new ArrayList<>();
         fm = new FileManager();
-        loadFile();
 
     }
 
@@ -44,21 +46,12 @@ public class Entries {
     //Returns the next entry number
     public int getNextEntryNumber()
     {   
-        if(entries.size()>0){
+        if(!entries.isEmpty()){
             return 1+entries.get(entries.size()-1).getEntryNumber();
         }else{
             return 1;
         }
         
-    }
-
-    //Loads the entries stored in the file into the entries array
-    public void loadFile(){
-        for(int i = 0; i < fm.getNumberOfEntries(); i++)
-        {
-            Entry e = fm.readEntry();
-            entries.add(e);
-        }
     }
 
     //Adds an entry to the entries array and updates the file
@@ -69,6 +62,15 @@ public class Entries {
             entries.add(e);
         }
         fm.updateFile(this);
+        
+    }
+
+    public void addEntryNoUpdate(Entry e)
+    {
+        if(e != null)
+        {
+            entries.add(e);
+        }
         
     }
 
