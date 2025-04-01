@@ -12,25 +12,43 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
- * Class Name: EntryFrame
+ * Class Name: FileManager
  * Credit: Pablo Bandera Lopez
- * Created: 03/05/2025
- * Modified: 03/24/2025
+ * Created: 03/31/2025
+ * Modified: 
  * 
- * Description: Class Extends App Frame, creates main menu for user selection
+ * Description: Class deals with File I/O. Has three sets of methds:
+ * FILE PATH & DIRECTORY: Used to construct strings pointing to the files needed to read and write and create and delete files. Uses Calendar to determine the current Month and Year.
+ * PRINTING METHODS: Use PrintWriter to print out to a file based on the path given.
+ * READING METHODS: Use Scanner to read information from the input document.
  * 
  * Attributes:
+ * - month: String
+ * - year: String
+ * - C: Calendar
  * 
  * Methods:
- * + <<constructor>>MenuFrame(String, LayoutManager)
- * 
+ * + <<constructor>>FileManager()
+ * + getCurrentMonth(): String
+ * + getCurrentYear(): String
+ * + getFilePath(String, String): String
+ * + getDirectoryPath(String): String
+ * + filePathExists(String, String): boolean
+ * + directoryExists(String): boolean
+ * + makeDir(String): void
+ * + makeFile(String): void
+ * + rmvFile(String): void
+ * + updateFile(Entries): void
+ * + readEntries(String): Entries
+ * + entryStringToEntry(String): Entry
+ * + getNumberOfEntries(String): int
  * 
  */
 public class FileManager {
     
     /*Attributes*/
     private String month, year;
-    final private static Calendar c = Calendar.getInstance();
+    final private static Calendar C = Calendar.getInstance();
 
 
     @SuppressWarnings("OverridableMethodCallInConstructor")
@@ -48,7 +66,7 @@ public class FileManager {
     /* FILE PATH & DIRECTORY METHODS */
     public String getCurrentMonth()
     {
-        int monthInt = c.get(Calendar.MONTH);
+        int monthInt = C.get(Calendar.MONTH);
         DateFormatSymbols symbols = new DateFormatSymbols();
         String [] months = symbols.getMonths();
         return months[monthInt];
@@ -56,7 +74,7 @@ public class FileManager {
 
     public String getCurrentYear()
     {
-        int yearInt = c.get(Calendar.YEAR);
+        int yearInt = C.get(Calendar.YEAR);
         return String.valueOf(yearInt);
     }
 
@@ -73,7 +91,7 @@ public class FileManager {
     }
     
     public boolean filePathExists(String m, String y) {return Files.exists(Paths.get(getFilePath(m, y)));}
-    public boolean directoryExists(String m, String y) {return Files.exists(Paths.get(getFilePath(m,y)));}
+    public boolean directoryExists(String y) {return Files.exists(Paths.get(getDirectoryPath(y)));}
 
     public void makeDir(String path)
     {
@@ -127,6 +145,7 @@ public class FileManager {
                 try{
                     e = entryStringToEntry(entryString);
                     entries.addEntryNoUpdate(e);
+                    
                 }catch(FileFormatException ex){}
             }
             s.close();
@@ -160,6 +179,7 @@ public class FileManager {
             if(i > 0){e.setSubcategory4(i);}
             e.setAccount(Integer.parseInt(tokens[8]));
             e.setComment(tokens[9]);
+            return e;
 
         }catch(InvalidEntryException e){}
         return null;
@@ -182,26 +202,37 @@ public class FileManager {
     /* TEST MAIN */
     public static void main(String[] args)
     {
-        FileManager fm  = new FileManager();    
-        System.out.println("Month: " + fm.month + " Year: " + fm.year);
+        FileManager fm  = new FileManager(); 
+        Decoder d;
+
+        System.out.println("Num of Entries: "+ fm.getNumberOfEntries(fm.getFilePath(fm.month, fm.year)));
+        System.out.println();
+
+        Entries entries = fm.readEntries(fm.getFilePath(fm.getCurrentMonth(), fm.getCurrentYear()));
+        ArrayList<Entry> ent = entries.getEntries();
+
+        for(int i = 0; i < ent.size(); i ++)
+        {
+            System.out.println("RAW ENTRY: "+ent.get(i).getEntryString());
+            d = new Decoder(ent.get(i).getEntryString());
+            System.out.println("Decoded Data: "+d.getDecoded());
+            System.out.println("Charged to: "+d.decodeAccount()+" Account.");
+            System.out.println();
+        }
+        
+        //MAKE NEW FILE
         // if(!fm.filePathExists(fm.month, fm.year)){
-        //     if(!fm.directoryExists(fm.month, fm.year))
+        //     if(!fm.directoryExists(fm.year))
         //     {
         //         fm.makeDir(fm.getDirectoryPath(fm.year));
         //     }
         //     fm.makeFile(fm.getFilePath(fm.month, fm.year));
         // }
-
-        System.out.println("Num of Entries: "+ fm.getNumberOfEntries(fm.getFilePath(fm.month, fm.year)));
-
-        Entries entries = fm.readEntries(fm.getFilePath(fm.month, fm.year));
-        System.out.println("Has been read");
-        System.out.println("Added to array list");
-        ArrayList<Entry> ent = entries.getEntries();
-        for(int i = 0; i < ent.size(); i ++){System.out.println(ent.get(i).getEntryString());}
-        
-        
+        //DELETE CURRENT FILE
         //fm.rmvFile(fm.getFilePath(fm.month, fm.year));
+
+        
+        
 
     }
 

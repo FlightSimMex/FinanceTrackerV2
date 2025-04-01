@@ -97,7 +97,7 @@ public class EntryFrame extends AppFrame
     private int entryNumber;
     final private Font DEFAULT_FONT = new Font("Calibri", 0, 20);
     final private String[] TYPES = {"None","Income", "Expense"};
-    final private String[] CATEGORIES_INCOME = {"None","Mom", "Pay Stub", "Other"};
+    final private String[] CATEGORIES_INCOME = {"None","Mother", "Pay Stub", "Other"};
     final private String[] CATEGORIES_EXPENSE = {"None", "Living", "Purchase","Flight", "School"};
     final private String[] ACCOUNTS = {"None", "Personal", "Flight", "Mother"};
     final private String[] SUBCAT1_EXPENSE_LIVING = {"None", "Appartment", "Food", "Transportation"};
@@ -114,7 +114,7 @@ public class EntryFrame extends AppFrame
     final private String[] SUBCAT3_FOOD_FOODOUT = {"None", "Eat Out", "Take Out", "Delivery"};
     final private String[] SUBCAT3_FOOD_SNACKS = {"None", "At School", "Coffee", "Ice Cream", "Other"};
     final private String[] SUBCAT4_RENT_UTILITIES = {"None", "Power", "Wifi", "Cell", "Water", "Gas", "Subscriptions"};
-    final private String[] SUBCAT4_FOODOUT_EATOUT = {"None", "At School", "Restautant"};
+    final private String[] SUBCAT4_FOODOUT_EATOUT = {"None", "At School", "Restaurant"};
     
     
 

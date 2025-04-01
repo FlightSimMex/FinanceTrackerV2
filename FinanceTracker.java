@@ -31,10 +31,22 @@ public class FinanceTracker
     {   
         //App Init
         Entries entries = new Entries();
+        FileManager fm = new FileManager();
+        entries = loadWorkingFile(fm, entries);
 
         //App Start
         AppFrame mm = new MenuFrame("Main Menu", new GridLayout(3,0), entries);
     
 
+    }
+
+    public Entries loadWorkingFile(FileManager fm, Entries entries)
+    {
+        if(fm.filePathExists(fm.getCurrentMonth(), fm.getCurrentYear()))
+        {
+            entries = fm.readEntries(fm.getFilePath(fm.getCurrentMonth(), fm.getCurrentYear()));
+        }
+        
+        return entries;
     }
 }

@@ -38,7 +38,6 @@ public class Entries {
     {
         this.entries = new ArrayList<>();
         fm = new FileManager();
-        loadFile();
 
     }
 
@@ -53,12 +52,6 @@ public class Entries {
             return 1;
         }
         
-    }
-
-    //Loads the entries stored in the file into the entries array
-    public void loadFile(){
-        Entries entries = fm.readEntries(fm.getFilePath(fm.getCurrentMonth(), fm.getCurrentYear()));
-        this.entries = entries.getEntries();
     }
 
     //Adds an entry to the entries array and updates the file
