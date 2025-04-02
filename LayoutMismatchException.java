@@ -9,7 +9,7 @@
  * Attributes:
  * 
  * Methods:
- * + <<constructor>>InvalidEntyrException(String)
+ * + <<constructor>>LayoutMismatchException(String)
  * 
  * 
  */

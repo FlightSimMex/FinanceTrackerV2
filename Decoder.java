@@ -86,33 +86,34 @@ public class Decoder {
     {
         if(tokens[2].equals("1")){return;}
         String subcategory = tokens[4];
-        if(tokens[3].equals("1"))
-        {
-            switch(subcategory){
-                case "1" -> subcategory = "Appartment";
-                case "2" -> subcategory = "Food";
-                case "3" -> subcategory = "Transportation";
+        switch (tokens[3]) {
+            case "1" -> {
+                switch(subcategory){
+                    case "1" -> subcategory = "Appartment";
+                    case "2" -> subcategory = "Food";
+                    case "3" -> subcategory = "Transportation";
+                }
             }
-        }else if(tokens[3].equals("2"))
-        {
-            switch(subcategory){
-                case "1" -> subcategory = "Personal";
-                case "2" -> subcategory = "Travel";
-                case "3" -> subcategory = "Paperwork";
+            case "2" -> {
+                switch(subcategory){
+                    case "1" -> subcategory = "Personal";
+                    case "2" -> subcategory = "Travel";
+                    case "3" -> subcategory = "Paperwork";
+                }
             }
-        }else if(tokens[3].equals("3"))
-        {
-            switch(subcategory){
-                case "1" -> subcategory = "Medical";
-                case "2" -> subcategory = "Currency";
-                case "3" -> subcategory = "Fun";
+            case "3" -> {
+                switch(subcategory){
+                    case "1" -> subcategory = "Medical";
+                    case "2" -> subcategory = "Currency";
+                    case "3" -> subcategory = "Fun";
+                }
             }
-        }else
-        {
-            switch(subcategory){
-                case "1" -> subcategory = "Tuition";
-                case "2" -> subcategory = "Flight Training";
-                case "3" -> subcategory = "Books";
+            default -> {
+                switch(subcategory){
+                    case "1" -> subcategory = "Tuition";
+                    case "2" -> subcategory = "Flight Training";
+                    case "3" -> subcategory = "Books";
+                }
             }
         }
         if(Integer.parseInt(tokens[4])>0){decoded += subcategory + " ";}

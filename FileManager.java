@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  * Class Name: FileManager
  * Credit: Pablo Bandera Lopez
  * Created: 03/31/2025
- * Modified: 
+ * Modified: 04/01/2025
  * 
  * Description: Class deals with File I/O. Has three sets of methds:
  * FILE PATH & DIRECTORY: Used to construct strings pointing to the files needed to read and write and create and delete files. Uses Calendar to determine the current Month and Year.
@@ -231,7 +231,7 @@ public class FileManager {
         //DELETE CURRENT FILE
         //fm.rmvFile(fm.getFilePath(fm.month, fm.year));
 
-        
+        //entries.removeEntry(2);
         
 
     }

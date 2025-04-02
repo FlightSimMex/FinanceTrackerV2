@@ -2,7 +2,7 @@
  * Class Name: MenuFrame
  * Credit: Pablo Bandera Lopez
  * Created: 03/05/2025
- * Modified: 03/24/2025
+ * Modified: 04/01/2025
  * 
  * Description: Class Extends App Frame, creates main menu for user selection
  * 
@@ -56,6 +56,7 @@ public class MenuFrame extends AppFrame implements ActionListener
     private JPanel topPanel, centerPanel, bottomPanel;
     private JButton newEntryButton, editEntryButton, deleteEntryButton, viewCurrntMonthButton, viewPastMonthButton, newMonthButton, clearMonthButton;
 
+    @SuppressWarnings("FieldMayBeFinal")
     private Entries entries;
 
     //Constructor
@@ -80,7 +81,7 @@ public class MenuFrame extends AppFrame implements ActionListener
             addToMainContainer(this.topPanel, 0);
             addToMainContainer(this.centerPanel, 1);
             addToMainContainer(this.bottomPanel, 2);  
-        } catch (LayoutMismatchException e) {System.out.println(e);}
+        } catch (LayoutMismatchException e) {}
         
 
     }
@@ -160,35 +161,35 @@ public class MenuFrame extends AppFrame implements ActionListener
     }
 
     //Event Hadelers 
+    @SuppressWarnings("unused")
     public void OnNewEntry()
     {
-        System.out.println("New Entry");
-        Entry en = null;
-        new EntryFrame("Entry Number: ", new GridLayout(2,5), en, this.entries);
-        
+        FileManager fm = new FileManager();
+        if(!fm.filePathExists(fm.getCurrentMonth(), fm.getCurrentYear())){JOptionPane.showMessageDialog(null, "Month file does not exist.","Error!", JOptionPane.ERROR_MESSAGE); return;}
+        AppFrame ef = new EntryFrame("Entry Number: ", new GridLayout(2,5), null, this.entries);//Creates new entry frame with null entry
     }
 
+    @SuppressWarnings("unused")
     public void OnEditEntry()
-    {
-        System.out.println("Edit Entry");
-        Entry en = null;
-        try{en = new Entry(10);en.setAmount(15.0);
-            en.setType(2);en.setCategory(1);
-            en.setSubcategory(1);
-            en.setSubcategory2(1);
-            en.setSubcategory2(1);
-            en.setSubcategory3(2);
-            en.setSubcategory4(1);
-            en.setAccount(1);
-            en.setComment("Comment");
-        }catch(InvalidEntryException e){System.out.println(e);}
-        
-        new EntryFrame("Entry Number: ", new GridLayout(2,5), en, this.entries);
+    {   
+        FileManager fm = new FileManager();
+        if(!fm.filePathExists(fm.getCurrentMonth(), fm.getCurrentYear())){JOptionPane.showMessageDialog(null, "Month file does not exist.","Error!", JOptionPane.ERROR_MESSAGE); return;}
+        String entrNum = JOptionPane.showInputDialog("Entry Number: ");//Get input from user using pop out.
+        try{int num = Integer.parseInt(entrNum);
+            Entry en = this.entries.getEntryByNmEntry(num);//Fetch entry by number from Entries
+            if(en != null){AppFrame ef = new EntryFrame("Entry Number: ", new GridLayout(2,5), en, this.entries);}//Create edit frame if found
+            else {JOptionPane.showMessageDialog(null, "Entry Number "+num+"\nNot Found!", "Error", JOptionPane.ERROR_MESSAGE);}
+        }catch(NumberFormatException e){JOptionPane.showMessageDialog(null, "Invalid Integer!", "Error!", JOptionPane.ERROR_MESSAGE);}
     }
 
     public void OnDeleteEntry()
     {
-        System.out.println("Delete Entry");
+        String entryNum = JOptionPane.showInputDialog("Entry Number: ");//Get input from user using pop-out
+        try{int num = Integer.parseInt(entryNum);
+            if(this.entries.getEntryByNmEntry(num) != null){this.entries.removeEntry(num);}
+            else {JOptionPane.showMessageDialog(null, "Entry Number "+num+"\nNot Found!", "Error", JOptionPane.ERROR_MESSAGE);}
+        }catch(NumberFormatException e){JOptionPane.showMessageDialog(null, "Invalid Integer!", "Error!", JOptionPane.ERROR_MESSAGE);}
+
     }
 
     public void OnViewCurrentMonth()
@@ -203,12 +204,30 @@ public class MenuFrame extends AppFrame implements ActionListener
 
     public void OnNewMonth()
     {
-        System.out.println("New Month");
+        FileManager fm  = new FileManager();
+        String month = fm.getCurrentMonth();
+        String year = fm.getCurrentYear();
+        if(!(fm.filePathExists(month,year)))
+        {
+            if(!(fm.directoryExists(year))){fm.makeDir(fm.getDirectoryPath(year));}
+            fm.makeFile(fm.getFilePath(month,year));
+        }else
+        { 
+            int sel = JOptionPane.showConfirmDialog(null, "Confirming will wipe current File.", "Caution: File Exists!", JOptionPane.WARNING_MESSAGE);
+            if(sel == 0){
+                fm.rmvFile(fm.getFilePath(month, year)); 
+                fm.makeFile(fm.getFilePath(month,year));
+                this.entries.clearList();
+            }
+        }
     }
 
     public void OnClearMonth()
     {
-        System.out.println("Clear Month");
+        FileManager fm = new FileManager();
+        if(!fm.filePathExists(fm.getCurrentMonth(), fm.getCurrentYear())){JOptionPane.showMessageDialog(null, "Month file does not exist.","Error!", JOptionPane.ERROR_MESSAGE); return;}
+        int sel = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the current file?", "Caution: Irreversible Action", JOptionPane.WARNING_MESSAGE);
+        if(sel == 0){fm.rmvFile(fm.getFilePath(fm.getCurrentMonth(),fm.getCurrentYear())); this.entries.clearList();}
     }
 }
 
