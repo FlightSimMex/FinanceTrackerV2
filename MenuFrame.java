@@ -225,6 +225,7 @@ public class MenuFrame extends AppFrame implements ActionListener
     public void OnClearMonth()
     {
         FileManager fm = new FileManager();
+        if(!fm.filePathExists(fm.getCurrentMonth(), fm.getCurrentYear())){JOptionPane.showMessageDialog(null, "Month file does not exist.","Error!", JOptionPane.ERROR_MESSAGE); return;}
         int sel = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete the current file?", "Caution: Irreversible Action", JOptionPane.WARNING_MESSAGE);
         if(sel == 0){fm.rmvFile(fm.getFilePath(fm.getCurrentMonth(),fm.getCurrentYear())); this.entries.clearList();}
     }
