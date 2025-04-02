@@ -2,7 +2,7 @@
  * Class Name: EntryFrame
  * Credit: Pablo Bandera Lopez
  * Created: 03/05/2025
- * Modified: 03/24/2025
+ * Modified: 03/31/2025
  * 
  * Description: Class Extends App Frame, creates instance of Entry Frame. This type of frame acts as the UI for the user to select the data for the entry. 
  * It can be pre-loaded with an entry for edditing previous entries or start from an empty entry. When the submit button is clicked if the entry is valid, it will be added to entries.

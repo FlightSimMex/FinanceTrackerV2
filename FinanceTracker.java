@@ -4,7 +4,7 @@ import java.awt.GridLayout;
  * Class Name: FinanceTracker
  * Credit: Pablo Bandera Lopez
  * Created: 03/05/2025
- * Modified: 03/24/2025
+ * Modified: 03/31/2025
  * 
  * Description: Contains main(), and instantiates the first app frame
  * 
@@ -27,6 +27,7 @@ public class FinanceTracker
         ftApp.runApp();
     }   
 
+    @SuppressWarnings("unused")
     public void runApp() throws LayoutMismatchException
     {   
         //App Init

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Class Name: Entries
  * Credit: Pablo Bandera Lopez
  * Created: 03/24/2025
- * Modified: 03/26/2025
+ * Modified: 04/01/2025
  * 
  * Description: Collection Class for Entry objects. Acts as runtime memory for the entries. Automatically updates file with changes.
  * 
@@ -17,10 +17,12 @@ import java.util.ArrayList;
  * Methods:
  * + <<constructor>>Entry(int entryNumber):void
  * + loadFile(): void
- * + addEntry(Entry e): void
- * + removeEntry(int entryNumber): void
- * + updateEntry(int entryNumber, Entry e): void
- * + getEntryByNmEntry(int entryNumber): Entry
+ * + addEntry(Entry): void
+ * + addEntryNoUpdate(Entry): void
+ * + removeEntry(int): void
+ * + clearList(): void
+ * + updateEntry(int, Entry): void
+ * + getEntryByNmEntry(int): Entry
  * 
  */
 
@@ -85,6 +87,12 @@ public class Entries {
             }
         }
         fm.updateFile(this);
+    }
+
+    //Removes an entry from the entries array and updates the file
+    public void clearList()
+    {
+        this.entries.clear();
     }
     
 
