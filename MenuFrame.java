@@ -174,21 +174,23 @@ public class MenuFrame extends AppFrame implements ActionListener
     {   
         FileManager fm = new FileManager();
         if(!fm.filePathExists(fm.getCurrentMonth(), fm.getCurrentYear())){JOptionPane.showMessageDialog(null, "Month file does not exist.","Error!", JOptionPane.ERROR_MESSAGE); return;}
-        String entrNum = JOptionPane.showInputDialog("Entry Number: ");//Get input from user using pop out.
-        try{int num = Integer.parseInt(entrNum);
+        String entryNums [] = this.entries.getEntryNumbers();
+        String entryNum = (String) JOptionPane.showInputDialog(null, "Entry Number: ", null, JOptionPane.PLAIN_MESSAGE,null,entryNums,null);//Get input from user using pop out.
+        try{int num = Integer.parseInt(entryNum);
             Entry en = this.entries.getEntryByNmEntry(num);//Fetch entry by number from Entries
             if(en != null){AppFrame ef = new EntryFrame("Entry Number: ", new GridLayout(2,5), en, this.entries);}//Create edit frame if found
             else {JOptionPane.showMessageDialog(null, "Entry Number "+num+"\nNot Found!", "Error", JOptionPane.ERROR_MESSAGE);}
-        }catch(NumberFormatException e){JOptionPane.showMessageDialog(null, "Invalid Integer!", "Error!", JOptionPane.ERROR_MESSAGE);}
+        }catch(NumberFormatException e){}
     }
 
     public void OnDeleteEntry()
     {
-        String entryNum = JOptionPane.showInputDialog("Entry Number: ");//Get input from user using pop-out
+        String entryNums [] = this.entries.getEntryNumbers();
+        String entryNum = (String) JOptionPane.showInputDialog(null, "Entry Number: ", null, JOptionPane.PLAIN_MESSAGE,null,entryNums,null);//Get input from user using pop out.
         try{int num = Integer.parseInt(entryNum);
             if(this.entries.getEntryByNmEntry(num) != null){this.entries.removeEntry(num);}
             else {JOptionPane.showMessageDialog(null, "Entry Number "+num+"\nNot Found!", "Error", JOptionPane.ERROR_MESSAGE);}
-        }catch(NumberFormatException e){JOptionPane.showMessageDialog(null, "Invalid Integer!", "Error!", JOptionPane.ERROR_MESSAGE);}
+        }catch(NumberFormatException e){}
 
     }
 
