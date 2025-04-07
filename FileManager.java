@@ -199,42 +199,5 @@ public class FileManager {
         return 0;
     }
 
-    /* TEST MAIN */
-    public static void main(String[] args)
-    {
-        FileManager fm  = new FileManager(); 
-        Decoder d;
-
-        System.out.println("Num of Entries: "+ fm.getNumberOfEntries(fm.getFilePath(fm.month, fm.year)));
-        System.out.println();
-
-        Entries entries = fm.readEntries(fm.getFilePath(fm.getCurrentMonth(), fm.getCurrentYear()));
-        ArrayList<Entry> ent = entries.getEntries();
-
-        for(int i = 0; i < ent.size(); i ++)
-        {
-            System.out.println("RAW ENTRY: "+ent.get(i).getEntryString());
-            d = new Decoder(ent.get(i).getEntryString());
-            System.out.println("Decoded Data: "+d.getDecoded());
-            System.out.println("Charged to: "+d.decodeAccount()+" Account.");
-            System.out.println();
-        }
-        
-        //MAKE NEW FILE
-        // if(!fm.filePathExists(fm.month, fm.year)){
-        //     if(!fm.directoryExists(fm.year))
-        //     {
-        //         fm.makeDir(fm.getDirectoryPath(fm.year));
-        //     }
-        //     fm.makeFile(fm.getFilePath(fm.month, fm.year));
-        // }
-        //DELETE CURRENT FILE
-        //fm.rmvFile(fm.getFilePath(fm.month, fm.year));
-
-        //entries.removeEntry(2);
-        
-
-    }
-
    
 }
