@@ -165,24 +165,6 @@ public class Entry {
         return this.entryString;
     }
     
-    /*TEST MAIN*/
-    public static void main(String[] args) {
-        try {
-            Entry testEntry = new Entry(1);
-            testEntry.setAmount(12.22);
-            testEntry.setType(2);
-            testEntry.setCategory(2);
-            testEntry.setSubcategory(1);
-            testEntry.setSubcategory2(2);
-            testEntry.setSubcategory3(1);
-            testEntry.setSubcategory4(3);
-            testEntry.setAccount(2);
-            testEntry.setComment("Test Comment");
-            System.out.println(testEntry.getEntryString());
-        } catch (InvalidEntryException e) {
-            System.out.println(e);
-        }
-    }
 
 }
 
