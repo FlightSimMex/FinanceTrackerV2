@@ -123,6 +123,12 @@ public class Entries {
 
     }
 
+    //Finds and returns entry by its position
+    public Entry getEntryByPosition(int index)
+    {
+        return entries.get(index);
+    }
+
     public ArrayList<Entry> getEntries()
     {
         return this.entries;
