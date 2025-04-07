@@ -151,55 +151,5 @@ public class Entries {
         arr = returns.toArray(arr);
         return arr;
     }
-
-    
-    
-    /*TEST MAIN */
-    public static void main(String[] args) {
-        Entries entries = new Entries();
-        try {
-        Entry e = new Entry(1);
-        e.setAmount(100.0);
-        e.setCategory(1);
-        e.setSubcategory(1);
-        e.setSubcategory2(1);
-        e.setSubcategory3(1);
-        e.setSubcategory4(1);
-        e.setAccount(1);
-        e.setComment("This is a comment1");
-        entries.addEntry(e);
-        
-            
-        } catch (InvalidEntryException e) {System.err.println(e);}
-
-        Entry find = entries.getEntryByNmEntry(1);
-        if(find != null){System.out.println("Entry Found: "+find.getEntryString());}
-
-        // for(Entry e : entries.entries)
-        // {
-        //     System.out.println(e.getEntryString());
-        // }
-
-        // entries.removeEntry(1);
-        // System.out.println("After removing entry 1:");
-        // for(Entry e : entries.entries)
-        // {
-        //     System.out.println(e.getEntryString());
-        // }
-
-        //Entry e2 = new Entry(2);
-        // e2.setAmount(200.0);
-        // e2.setCategory(2);
-        // e2.setSubcategory(2);
-        // e2.setSubcategory2(2);
-        // e2.setSubcategory3(2);
-        // e2.setSubcategory4(2);
-        // e2.setAccount(2);
-        // e2.setComment("This is a comment2");
-        // entries.addEntry(e2);
-    }
-
-
-
     
 }
