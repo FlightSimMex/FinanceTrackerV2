@@ -20,7 +20,7 @@ public class FinanceTracker
 {
     //Constructor
     public FinanceTracker(){}
-
+    
     public static void main(String[] args) throws LayoutMismatchException 
     {
         FinanceTracker ftApp = new FinanceTracker();

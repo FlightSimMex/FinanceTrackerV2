@@ -43,6 +43,7 @@
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.*;
 
 public class MenuFrame extends AppFrame implements ActionListener
@@ -174,32 +175,55 @@ public class MenuFrame extends AppFrame implements ActionListener
     {   
         FileManager fm = new FileManager();
         if(!fm.filePathExists(fm.getCurrentMonth(), fm.getCurrentYear())){JOptionPane.showMessageDialog(null, "Month file does not exist.","Error!", JOptionPane.ERROR_MESSAGE); return;}
-        String entrNum = JOptionPane.showInputDialog("Entry Number: ");//Get input from user using pop out.
-        try{int num = Integer.parseInt(entrNum);
+        String entryNums [] = this.entries.getEntryNumbers();
+        String entryNum = (String) JOptionPane.showInputDialog(null, "Entry Number: ", null, JOptionPane.PLAIN_MESSAGE,null,entryNums,null);//Get input from user using pop out.
+        try{int num = Integer.parseInt(entryNum);
             Entry en = this.entries.getEntryByNmEntry(num);//Fetch entry by number from Entries
             if(en != null){AppFrame ef = new EntryFrame("Entry Number: ", new GridLayout(2,5), en, this.entries);}//Create edit frame if found
             else {JOptionPane.showMessageDialog(null, "Entry Number "+num+"\nNot Found!", "Error", JOptionPane.ERROR_MESSAGE);}
-        }catch(NumberFormatException e){JOptionPane.showMessageDialog(null, "Invalid Integer!", "Error!", JOptionPane.ERROR_MESSAGE);}
+        }catch(NumberFormatException e){}
     }
 
     public void OnDeleteEntry()
     {
-        String entryNum = JOptionPane.showInputDialog("Entry Number: ");//Get input from user using pop-out
+        String entryNums [] = this.entries.getEntryNumbers();
+        String entryNum = (String) JOptionPane.showInputDialog(null, "Entry Number: ", null, JOptionPane.PLAIN_MESSAGE,null,entryNums,null);//Get input from user using pop out.
         try{int num = Integer.parseInt(entryNum);
             if(this.entries.getEntryByNmEntry(num) != null){this.entries.removeEntry(num);}
             else {JOptionPane.showMessageDialog(null, "Entry Number "+num+"\nNot Found!", "Error", JOptionPane.ERROR_MESSAGE);}
-        }catch(NumberFormatException e){JOptionPane.showMessageDialog(null, "Invalid Integer!", "Error!", JOptionPane.ERROR_MESSAGE);}
+        }catch(NumberFormatException e){}
 
     }
 
     public void OnViewCurrentMonth()
     {
-        System.out.println("View Current Month");
+        FileManager fm = new FileManager();
+        if(!fm.filePathExists(fm.getCurrentMonth(), fm.getCurrentYear())){JOptionPane.showMessageDialog(null, "Month is Empty.","Error!", JOptionPane.ERROR_MESSAGE); return;}
+        @SuppressWarnings("unused")
+        DisplayFrame df = new DisplayFrame(fm.getCurrentMonth(), fm, this.entries, fm.getCurrentMonth(), fm.getCurrentYear());
     }
 
     public void OnViewPastMonth()
     {
-        System.out.println("View Past Month");
+        FileManager fm = new FileManager();
+        
+        //User Select year
+        File directories = new File("./Files/");
+        String [] years = directories.list();
+        String year = (String) JOptionPane.showInputDialog(null, "Select Year: ", null, JOptionPane.PLAIN_MESSAGE,null,years,null);
+        if(year == null){return;}
+
+        //User Select month
+        File directory = new File(fm.getDirectoryPath(year));
+        String [] months = directory.list();
+        String month = (String) JOptionPane.showInputDialog(null, "Select Month: ", null, JOptionPane.PLAIN_MESSAGE,null,months,null);
+        if(month == null){return;}
+        month = month.substring(0, month.length()-4);
+        
+
+        if(!fm.filePathExists(month, year)){JOptionPane.showMessageDialog(null, "File is empty or corrupt!", "ERROR!", JOptionPane.ERROR_MESSAGE); return;}
+        @SuppressWarnings("unused")
+        DisplayFrame df = new DisplayFrame(month, fm, this.entries, month, year );
     }
 
     public void OnNewMonth()

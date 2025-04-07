@@ -56,7 +56,7 @@ public class Decoder {
         String type = tokens[2];
         if(type.equals("1")){type = "Income";}
         else{type = "Expense";}
-        decoded += type + " ";
+        decoded += type + ", ";
     }
 
     private void determineCategory()
@@ -78,7 +78,7 @@ public class Decoder {
                 case "4" -> category = "School";
             }
         }
-        decoded += category + " ";
+        decoded += category + ", ";
 
     }
 
@@ -116,7 +116,7 @@ public class Decoder {
                 }
             }
         }
-        if(Integer.parseInt(tokens[4])>0){decoded += subcategory + " ";}
+        if(Integer.parseInt(tokens[4])>0){decoded += subcategory + ", ";}
     }
 
     private void determineSubCategory2()
@@ -154,7 +154,7 @@ public class Decoder {
                 case "3" -> subcategory2 = "Paperwprk";
             }
         }
-        if(Integer.parseInt(tokens[5])>0){decoded += subcategory2 + " ";}
+        if(Integer.parseInt(tokens[5])>0){decoded += subcategory2 + ", ";}
     }
 
     private void determineSubCategory3()
@@ -193,7 +193,7 @@ public class Decoder {
                 case "4" -> subcategory3 = "Other";
             }
         }
-        if(Integer.parseInt(tokens[6])>0){decoded += subcategory3 + " ";}
+        if(Integer.parseInt(tokens[6])>0){decoded += subcategory3 + ", ";}
     }
 
     private void determineSubCategory4()

@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Class Name: Entries
  * Credit: Pablo Bandera Lopez
  * Created: 03/24/2025
- * Modified: 04/01/2025
+ * Modified: 04/04/2025
  * 
  * Description: Collection Class for Entry objects. Acts as runtime memory for the entries. Automatically updates file with changes.
  * 
@@ -23,6 +23,7 @@ import java.util.ArrayList;
  * + clearList(): void
  * + updateEntry(int, Entry): void
  * + getEntryByNmEntry(int): Entry
+ * + getEntryNumbers(): String []
  * 
  */
 
@@ -122,6 +123,12 @@ public class Entries {
 
     }
 
+    //Finds and returns entry by its position
+    public Entry getEntryByPosition(int index)
+    {
+        return entries.get(index);
+    }
+
     public ArrayList<Entry> getEntries()
     {
         return this.entries;
@@ -130,6 +137,19 @@ public class Entries {
     public int getNumberOfEntries()
     {
         return entries.size();
+    }
+
+    public String [] getEntryNumbers()
+    {
+       
+        ArrayList<String> returns = new ArrayList<>();
+        for(Entry e : this.entries)
+        {   
+            returns.add(Integer.toString(e.getEntryNumber()));
+        }   
+        String arr [] = new String[returns.size()];
+        arr = returns.toArray(arr);
+        return arr;
     }
 
     
